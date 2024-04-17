@@ -30,6 +30,7 @@ class UserServiceImplTest {
     public static final String NAME     = "Ademir ";
     public static final String EMAIL    = "emailemail@emailcom";
     public static final String PASSWORD = "123";
+
     public static final String OBJETO_NAO_ENCONTRADO_ID = "Objeto não encontrado! id: ";
     public static final int INDEX = 0;
     public static final String EMAIL_JA_CADASTRADO_NO_SISTEMA = "Email já cadastrado no sistema!";
@@ -178,11 +179,9 @@ class UserServiceImplTest {
         }
     }
 
-
     private void startUser(){
         user         = new User                   (ID, NAME, EMAIL, PASSWORD);
         userDTO      = new UserDTO                (ID, NAME, EMAIL, PASSWORD);
         optionalUser =  Optional.of(new User(ID, NAME, EMAIL, PASSWORD));
     }
-
 }

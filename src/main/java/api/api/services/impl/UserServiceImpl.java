@@ -19,7 +19,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private ModelMapper mapper;
 
-
     @Autowired
     private UserRepository repository;
 
@@ -52,14 +51,11 @@ public class UserServiceImpl implements UserService {
         repository.deleteById(id);
     }
 
-
     private void findByEmail(UserDTO obj){
         Optional<User> user = repository.findByEmail(obj.getEmail());
         if(user.isPresent() && !user.get().getId().equals(obj.getId())){
             throw new DataIntegratyViolationException("Email já cadastrado no sistema!");
         }
-
     }
-
 
 }

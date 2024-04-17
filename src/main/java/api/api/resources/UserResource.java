@@ -1,6 +1,5 @@
 package api.api.resources;
 
-import api.api.domain.User;
 import api.api.dto.UserDTO;
 import api.api.services.UserService;
 import org.modelmapper.ModelMapper;
@@ -18,6 +17,7 @@ import java.util.stream.Collectors;
 public class UserResource {
 
     public static final String ID = "/{id}";
+
     @Autowired
     private ModelMapper mapper;
 
@@ -26,18 +26,15 @@ public class UserResource {
 
     @GetMapping(ID)
     public ResponseEntity<UserDTO> findById(@PathVariable Integer id) {
-
         return ResponseEntity.ok().body(mapper.map(service.findById(id),UserDTO.class));
     }
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> findAll() {
-
         return ResponseEntity.ok()
                 .body(service.findAll()
                         .stream().map(x -> mapper.map(x,UserDTO.class))
                         .collect(Collectors.toList()));
-
     }
 
     @PostMapping
@@ -54,7 +51,6 @@ public class UserResource {
                                           @RequestBody UserDTO obj){
         obj.setId(id);
         return ResponseEntity.ok().body(mapper.map(service.update(obj), UserDTO.class));
-
     }
 
     @DeleteMapping(ID)
