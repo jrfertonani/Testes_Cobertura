@@ -3,17 +3,17 @@ package api.api.services.impl;
 import api.api.domain.User;
 import api.api.dto.UserDTO;
 import api.api.repositories.UserRepository;
-import org.junit.jupiter.api.Assertions;
+import api.api.services.exceptions.ObjectNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
@@ -29,6 +29,8 @@ class UserServiceImplTest {
     public static final String NAME     = "Ademir ";
     public static final String EMAIL    = "emailemail@emailcom";
     public static final String PASSWORD = "123";
+    public static final String OBJETO_NAO_ENCONTRADO_ID = "Objeto não encontrado! id: ";
+    public static final int INDEX = 0;
 
 
     @InjectMocks
@@ -39,7 +41,6 @@ class UserServiceImplTest {
 
     @Mock
     private ModelMapper mapper;
-
 
     private User user;
     private UserDTO userDTO;
@@ -66,7 +67,34 @@ class UserServiceImplTest {
     }
 
     @Test
-    void findAll() {
+    void whenFindByIdThenReturnAnEmptyOptional() {
+        when(repository.findById(anyInt())).thenThrow(new ObjectNotFoundException(OBJETO_NAO_ENCONTRADO_ID ));
+
+
+        try{
+            service.findById(ID);
+        }catch(Exception ex){
+            assertEquals(ObjectNotFoundException.class, ex.getClass());
+            assertEquals(OBJETO_NAO_ENCONTRADO_ID,ex.getMessage());
+        }
+    }
+
+    @Test
+    void whenFindAllThenReturnAnListOfUsers() {
+        when(repository.findAll()).thenReturn(List.of(user));
+
+        List<User> response = service.findAll();
+
+        assertNotNull(response);
+        assertEquals(1,response.size());
+        assertEquals(User.class, response.get(INDEX).getClass());
+
+        assertEquals(ID,response.get(INDEX).getId());
+        assertEquals(NAME,response.get(INDEX).getName());
+        assertEquals(EMAIL,response.get(INDEX).getEmail());
+        assertEquals(PASSWORD,response.get(INDEX).getPassword());
+
+
     }
 
     @Test
