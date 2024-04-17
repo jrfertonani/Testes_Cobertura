@@ -1,6 +1,7 @@
 package api.api.services.impl;
 
 import api.api.domain.User;
+import api.api.dto.UserDTO;
 import api.api.repositories.UserRepository;
 import api.api.services.UserService;
 import api.api.services.exceptions.ObjectNotFoundException;
@@ -14,6 +15,8 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Autowired
+    private ModelMapper mapper;
 
 
     @Autowired
@@ -28,6 +31,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public User create(UserDTO obj) {
+        return repository.save(mapper.map(obj,User.class));
     }
 
 
