@@ -2,7 +2,7 @@ package api.api.services;
 
 
 import api.api.domain.User;
-import api.api.dto.UserDTO;
+import api.api.domain.dto.UserDTO;
 
 import java.util.List;
 

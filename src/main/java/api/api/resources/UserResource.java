@@ -1,6 +1,6 @@
 package api.api.resources;
 
-import api.api.dto.UserDTO;
+import api.api.domain.dto.UserDTO;
 import api.api.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

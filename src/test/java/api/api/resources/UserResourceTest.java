@@ -1,14 +1,13 @@
 package api.api.resources;
 
 import api.api.domain.User;
-import api.api.dto.UserDTO;
+import api.api.domain.dto.UserDTO;
 import api.api.services.impl.UserServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,8 +32,8 @@ class UserResourceTest {
     public static final String EMAIL    = "emailemail@emailcom";
     public static final String PASSWORD = "123";
 
-    private User user;
-    private UserDTO userDTO;
+    private User user = new User();
+    private UserDTO userDTO = new UserDTO();
 
     @InjectMocks
     private UserResource resource;

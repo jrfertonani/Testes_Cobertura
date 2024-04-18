@@ -1,13 +1,13 @@
 package api.api.services.impl;
 
 import api.api.domain.User;
-import api.api.dto.UserDTO;
+import api.api.domain.dto.UserDTO;
 import api.api.repositories.UserRepository;
 import api.api.services.UserService;
-import api.api.services.exceptions.DataIntegratyViolationException;
 import api.api.services.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     private void findByEmail(UserDTO obj){
         Optional<User> user = repository.findByEmail(obj.getEmail());
         if(user.isPresent() && !user.get().getId().equals(obj.getId())){
-            throw new DataIntegratyViolationException("Email já cadastrado no sistema!");
+            throw new DataIntegrityViolationException("Email já cadastrado no sistema!");
         }
     }
 
