@@ -1,6 +1,5 @@
 package api.api.resources.exceptions;
 
-import api.api.resources.exceptions.StandardError;
 import api.api.services.exceptions.DataIntegratyViolationException;
 import api.api.services.exceptions.ObjectNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
